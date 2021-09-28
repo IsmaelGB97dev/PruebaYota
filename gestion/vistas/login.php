@@ -39,9 +39,25 @@
             </div>
         </form>
     </div>
+
+    <div class="modal fade" id="modal-login" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" res="<?php echo $loginFallido; ?>">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header justify-content-center">
+                    <h5 class="modal-title" id="exampleModalLabel">Acceso fallido</h5>
+                </div>
+                <div class="modal-body text-center">
+                    Usuario o contraseña incorrecto, vuelve a intentarlo.
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- scripts -->
-    <script src="gestion/js/bootstrap.bundle.min.js"></script>
     <script src="gestion/js/jquery-3.6.0.min.js"></script>
+    <script src="gestion/js/bootstrap.bundle.min.js"></script>
     <script src="gestion/js/login.js"></script>
 </body>
 

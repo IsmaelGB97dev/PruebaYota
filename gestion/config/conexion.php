@@ -4,24 +4,14 @@
  */
 class DB 
 {
-    // ------------ ATRIBUTOS -----------//
-    private $host;
-    private $db;
-    private $usuario;
-    private $password;
-    private $charset;
+   
     
     /**
-     * Constructor de la clase, con asignacion a los atributos
+     * Constructor de la clase
      * @return void
      */
     public function __construct()
     {
-        $this->host = 'localhost';
-        $this->db = 'sys_gestiones';
-        $this->usuario = 'root';
-        $this->password = '';
-        $this->charset = 'utf8';
     }
     
     /**
@@ -30,7 +20,7 @@ class DB
      */
     function conectar() {
         try {
-            $pdo = new PDO("mysql:host=".$this->host.";dbname=".$this->db.";charset=".$this->charset, $this->usuario, $this->password);
+            $pdo = new PDO("mysql:host=localhost;dbname=sys_gestiones;charset=utf8", 'root', '');
             return $pdo;
         } catch (PDOException $ex) {
             print_r('Error de conexión con la base de datos:' . $ex->getMessage());

@@ -84,13 +84,12 @@ class Sesion
         return $_SESSION['nombre'];
     }
 
-    // ------------------- METODOS ------------------ // 
-       
+    // ------------------- METODOS ------------------ //        
     /**
      * Libera todas las variables de sesion y destruye todos los datos registrados a la sesion
      * @return void
      */
-    public function borrarSesion() {
+    public function BorrarSesion() {
         session_unset();
         session_destroy();
     }
