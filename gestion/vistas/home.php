@@ -13,7 +13,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio</title>
+    <title><?php 
+        switch($solicitud) {
+            case '': echo 'Crear gestion'; break; 
+            case 'gestion': echo 'Crear gestion'; break;
+            case 'lista': echo 'Gestiones'; break;
+            case 'tickets': echo 'Ticket'; break; 
+            case 'hist': echo 'Historial'; break;           
+        }
+    ?> </title>
 
     <link rel="icon" href="gestion/imagenes/fav.png">
     <link rel="stylesheet" href="gestion/css/bootstrap.min.css">
@@ -45,6 +53,9 @@
                     <li class="nav-item">
                         <a class="nav-link <?php echo $solicitud == 'tickets' ? "active":'' ?>" href="?dr=tickets">Tickets</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link <?php echo $solicitud == 'hist' ? "active":'' ?>" href="?dr=hist">Historial</a>
+                    </li>
                 </ul>
                 <form class="d-flex me-5">
                     <div class="dropdown">
@@ -52,7 +63,7 @@
                           Usuario: <?php echo $sesion->getNombreActual(); ?>
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <li><a class="dropdown-item" href="?dr=lg">Salir</a></li>
+                            <li><a class="dropdown-item" href="?dr=lg">❌ Cerrar sesión</a></li>
                         </ul>
                     </div>
                 </form>
@@ -65,7 +76,8 @@
             case '': include_once 'gestion/vistas/capturarGestion.php'; break; 
             case 'gestion': include_once 'gestion/vistas/capturarGestion.php'; break;
             case 'lista': include_once 'gestion/vistas/listaGestiones.php'; break;
-            case 'tickets': include_once 'gestion/vistas/tickets.php'; break;            
+            case 'tickets': include_once 'gestion/vistas/tickets.php'; break; 
+            case 'hist': include_once 'gestion/vistas/historial.php'; break;           
         }
     ?>
 </body>

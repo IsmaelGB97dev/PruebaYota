@@ -11,36 +11,77 @@ class GestionClienteModel extends DB
     public function __construct()
     {        
     }
-
+    
+    /**
+     * Establecer codigoGestionCliente
+     * @param  int $codigoGestionCliente
+     * @return void
+     */
     public function setCodigoGestionCliente($codigoGestionCliente) {
         $this->codigoGestionCliente = $codigoGestionCliente;
-    }
+    }    
+    /**
+     * Obtener codigoGestionCliente
+     * @return int
+     */
     public function getCodigoGestionCliente() {
         return $this->codigoGestionCliente;
     }
-
+    
+    /**
+     * Establecer atendido
+     * @param  string $atendido
+     * @return void
+     */
     public function setAtendido($atendido) {
         $this->atendido = $atendido;
-    }
+    }    
+    /**
+     * Obtener atendido
+     * @return string
+     */
     public function getAtendido() {
         return $this->atendido;
     }
-
+    
+    /**
+     * Establecer fechaCreacion
+     * @param  datetime $fechaCreacion
+     * @return void
+     */
     public function setFechaCreacion($fechaCreacion) {
         $this->fechaCreacion = $fechaCreacion;
-    }
+    }    
+    /**
+     * getFechaCreacion, Obtener fechaCreacion
+     * @return datetime
+     */
     public function getFechaCreacion() {
         return $this->fechaCreacion;
     }
-
+    
+    /**
+     * Establecer codigoGestion
+     * @param  int $codigoGestion
+     * @return void
+     */
     public function setCodigoGestion($codigoGestion) {
         $this->codigoGestion = $codigoGestion;
-    }
+    }    
+    /**
+     * Obtener codigoGestion
+     * @return int
+     */
     public function getCodigoGestion() {
         return $this->codigoGestion;
     }
 
-    // -------------------- METODOS ------------------- //
+    // -------------------- METODOS ------------------- //    
+    /**
+     * Insertar nuevo registro en la tabla gestionCliente
+     * @param  /gestionClienteModel $objGestionCliente
+     * @return bool
+     */
     public function InsertarGestionCliente($objGestionCliente) {
         $consulta = 'INSERT INTO gestioncliente (atendido, fechaCreacion, codigoGestion)
                      VALUES(:atendido, :creacion, :gestion)';
@@ -56,7 +97,11 @@ class GestionClienteModel extends DB
             return false;
         }
     }
-
+    
+    /**
+     * Obtener datos de la tabla gestionCliente
+     * @return array|false
+     */
     public function ObtenerGestionesCliente() {
         $consulta = 'SELECT c.codigoGestionCliente, g.nombre, c.codigoGestion, c.atendido, c.fechaCreacion
                     FROM gestion g INNER JOIN gestioncliente c
@@ -74,7 +119,12 @@ class GestionClienteModel extends DB
             return false;
         }
     }
-
+    
+    /**
+     * Verificar si una gestionCliente ya fue atendida
+     * @param  int $codigoGestionCliente
+     * @return bool
+     */
     public function VerificarDisponibilidad($codigoGestionCliente) {
         $consulta = 'SELECT atendido
                      FROM gestioncliente
@@ -89,7 +139,12 @@ class GestionClienteModel extends DB
             return false;
         }
     }
-
+    
+    /**
+     * Actualizar atributo 'atendido = si', para definir gestionCliente como ya atendida
+     * @param  /gestionClienteModel $objGestionCliente
+     * @return bool
+     */
     public function AtenderGestionCliente($objGestionCliente) {
         
         $consulta = 'UPDATE gestioncliente
@@ -104,6 +159,5 @@ class GestionClienteModel extends DB
         } else {
             return false;
         }
-        
     }
 }

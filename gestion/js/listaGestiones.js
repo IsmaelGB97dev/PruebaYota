@@ -6,6 +6,9 @@ $(document).ready(function() {
     CargarGestiones();
     btnGestiones.on('click', RegistrarGestionCliente);
 
+    /**
+     * Realiza solicitud AJAX para obtener datos de las gestiones y renderizarlas en el documento
+     */
     function CargarGestiones() {
         $.ajax({
             type: 'post',
@@ -26,6 +29,9 @@ $(document).ready(function() {
         });
     }
 
+    /**
+     * Realizar proceso de registro de gestionCliente al dar click en algun boton de gestion, mediante AJAX
+     */
     function RegistrarGestionCliente() {
         let gestion = $(this);
         $.ajax({
@@ -45,11 +51,18 @@ $(document).ready(function() {
         });
     }
 
+    /**
+     * Crear alerta mediante toast
+     * @param  {string} texto Texto a mostrar
+     */
     function MostrarMensaje(texto) {
         mensaje.toast('show');
         mensaje.find('.toast-body').html(texto);
     }
 
+    /**
+     * Reasignar variables y eventos, para despues de solicitudes AJAX
+     */
     function Reasignar() {
         btnGestiones = $(".btn-gestion");
         btnGestiones.on('click', RegistrarGestionCliente);

@@ -19,7 +19,9 @@ $(document).ready(function() {
     formulario.on('submit', GuardarGestion);
     btnGuardar.attr('disabled', true);
 
-
+    /**
+     * Obtener datos de gestionesCliente (mediante AJAX) y llenar tabla
+     */
     function CargarGestiones() {
         $.ajax({
             type: 'post',
@@ -27,38 +29,54 @@ $(document).ready(function() {
             data: { funcion: 'datosCl' },
             success: function(res) {
                 res = JSON.parse(res);
-                let html = '';
-                for (const x in res) {
-                    html += `<tr r="${res[x][0]}" g="${res[x][2]}">
+                if (res == false) {
+                    tablaGestiones.find('tbody').html('');
+                    alert('No hay gestiones de clientes');
+                } else {
+                    let html = '';
+                    for (const x in res) {
+                        html += `<tr r="${res[x][0]}" g="${res[x][2]}">
                                 <td>${Number(x) + 1}</td>
                                 <td>${res[x][1].toUpperCase()}</td>
                             </tr>`;
+                    }
+                    tablaGestiones.find('tbody').html(html);
                 }
-                tablaGestiones.find('tbody').html(html);
             }
         });
     }
 
+    /**
+     * Verificar si una gestionCliente ya esta siendo atendida (solicitud AJAX) y realizar acciones correspondiante
+     */
     function VerificarAtendido() {
         let gestionC = tablaGestiones.find('tbody tr:first').attr('r');
-        $.ajax({
-            type: 'post',
-            url: 'gestion/ajax/gestionAjax.php',
-            data: {
-                gestion: gestionC,
-                funcion: 'verificar'
-            },
-            success: function(res) {
-                if (res.trim() == 'false') {
-                    AtenderCliente();
-                } else {
-                    CargarGestiones();
-                    alert('Gestion ya fue atendida, intenta nuevamente');
+        if (gestionC == undefined) {
+            tablaGestiones.find('tbody').html('');
+            alert('No hay gestion de cliente que atender');
+        } else {
+            $.ajax({
+                type: 'post',
+                url: 'gestion/ajax/gestionAjax.php',
+                data: {
+                    gestion: gestionC,
+                    funcion: 'verificar'
+                },
+                success: function(res) {
+                    if (res.trim() == 'false') {
+                        AtenderCliente();
+                    } else {
+                        CargarGestiones();
+                        alert('Gestion ya fue atendida, intenta nuevamente');
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 
+    /**
+     * Realizar cambio a atendido de gestionCliente (solicitud AJAX) y diversas acciones
+     */
     function AtenderCliente() {
         btnAtender.attr('disabled', true);
         btnActualizar.attr('disabled', true);
@@ -89,7 +107,10 @@ $(document).ready(function() {
             }
         });
     }
-
+    /**
+     * Crear options para el select de gestiones reales (solicitud AJAX) y seleccionar la option con la gestion del cliente 
+     * @param  {string} gestion GestionCliente
+     */
     function CargarGestionesReales(gestion) {
         $.ajax({
             type: 'post',
@@ -105,6 +126,10 @@ $(document).ready(function() {
         });
     }
 
+    /**
+     * Realiza guardado de gestion (ticket) y diversas acciones (AJAX)
+     * @param  {} e
+     */
     function GuardarGestion(e) {
         e.preventDefault();
         let gestionC = tablaGestiones.find('tbody tr:first').attr('r');
@@ -131,14 +156,10 @@ $(document).ready(function() {
                     btnAtender.attr('disabled', false);
                     btnActualizar.attr('disabled', false);
                     infoGestion.html('...');
-                    formulario[0].attr('disabled', true);
                 } else {
                     alert('Error');
                 }
             }
         });
     }
-
-
-
 });

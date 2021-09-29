@@ -9,6 +9,10 @@ $(document).ready(function() {
     ObtenerGestiones();
     formCrear.on('submit', CrearGestion);
 
+    /**
+     * Realiza el proceso de creacion de nueva gestion y su respectiva solicitud AJAX
+     * @param  {object} e Formulario
+     */
     function CrearGestion(e) {
         e.preventDefault();
         $.ajax({
@@ -24,6 +28,7 @@ $(document).ready(function() {
                 if (res.trim() == 'true') {
                     MostrarMensaje(`Gestión '${txtNombre.val().trim()}', Agregada`);
                     ObtenerGestiones();
+                    formCrear[0].reset();
                 } else {
                     MostrarMensaje('Ocurrio un error');
                 }
@@ -31,6 +36,9 @@ $(document).ready(function() {
         });
     }
 
+    /**
+     * Realiza el procesos de obtener todas las gestiones (solicitud AJAX) y rellenar tabla con dichos datos
+     */
     function ObtenerGestiones() {
         $.ajax({
             type: "post",
@@ -47,9 +55,6 @@ $(document).ready(function() {
                             <td>${res[x][2]}</td>
                             <td>${res[x][3]}</td>
                             <td>${res[x][5]}</td>
-                            <td title="Editar" d="${res[x][0]}">
-                                <a href="#" class="btn btn-sm btn-warning">✏</a>
-                            </td>
                         </tr>
                     `;
                 }
@@ -58,9 +63,12 @@ $(document).ready(function() {
         });
     }
 
+    /**
+     * Crear una alerta con toast  
+     * @param  {string} texto Texto a mostrar
+     */
     function MostrarMensaje(texto) {
         mensaje.toast('show');
         mensaje.find('.toast-body').html(texto);
     }
-
 });

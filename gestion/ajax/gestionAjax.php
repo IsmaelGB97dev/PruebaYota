@@ -6,10 +6,12 @@ include_once '../controladores/gestionClienteController.php';
 include_once '../modelos/gestionClienteModel.php';
 include_once '../config/session.php';
 
-
 date_default_timezone_set('America/Costa_Rica');
 
-
+/**
+ * Devuelve "true" si se inserto correctamente la gestion, de lo contrario "false"
+ * @return string
+ */
 function CrearGestion() {
     $controladorGestion = new GestionController();
     $sesion = new Sesion();
@@ -23,6 +25,10 @@ function CrearGestion() {
     }
 }
 
+/**
+ * Devuelve JSON con los datos de las gestiones, 'false' en caso de error
+ * @return JSON|false
+ */
 function ObtenerGestiones() {
     $controladorGestion = new GestionController();
     $datos = $controladorGestion->ObtenerGestiones();
@@ -33,6 +39,10 @@ function ObtenerGestiones() {
     }
 }
 
+/**
+ * Devuelve 'true', si se inserto correctamente la gestionCliente, de lo contrario 'false'
+ * @return string
+ */
 function InsertarGestionCliente() {
     $controladorgesCliente = new GestionClienteController();
     $respuesta = $controladorgesCliente->InsertarGestionCliente($_POST['gestion'], 'no', date('Y-m-d H:i:s'));
@@ -43,6 +53,10 @@ function InsertarGestionCliente() {
     }
 }
 
+/**
+ * Devuelve 'true' si se realizo correctamente la actualizacion de atributo [atendido], de lo contrario 'false'
+ * @return string
+ */
 function AtenderGestionCliente() {
     $controladorgesCliente = new GestionClienteController();
     $resultado = $controladorgesCliente->AtenderGestionCliente($_POST['gestion']);
@@ -53,6 +67,10 @@ function AtenderGestionCliente() {
     }
 }
 
+/**
+ * Devuelve JSON con los datos de la gestionCliente, 'false' en caso de error
+ * @return JSON|string
+ */
 function CargarGestionesCliente() {
     $controladorGesCliente = new GestionClienteController();
     $respuesta = $controladorGesCliente->ObtenerGestionesCliente();
@@ -63,6 +81,10 @@ function CargarGestionesCliente() {
     }
 }
 
+/**
+ * Devuelve 'true' si una gestionCliente ya fue atendido, de lo contrario 'false'
+ * @return string
+ */
 function VerificarAtendido() {
     $controladorgesCliente = new GestionClienteController();
     $res = $controladorgesCliente->VerificarAtendido($_POST['gestion']);
@@ -73,7 +95,7 @@ function VerificarAtendido() {
     }
 }
 
-
+// ---------- LLAMADO A FUNCIONES ---------//
 switch($_POST['funcion']) {
     case 'crear': CrearGestion(); break;
     case 'datos': ObtenerGestiones(); break;

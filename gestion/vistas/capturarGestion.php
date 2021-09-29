@@ -13,7 +13,7 @@
         <div class="row p-4">
             <div class="form-capturar col-lg-4 col-sm-11 border p-2">
                 <h4 class="text-center">Gestión</h4>
-                <form id="form-crear" method="POST">
+                <form id="form-crear" method="POST" class="form-group">
                     <div class="mb-3">
                         <label class="form-label" for="nombre">Nombre:</label>
                         <input class="form-control" type="text" name="nombre" id="nombre" maxlength="100" required autocomplete="off">
@@ -53,7 +53,6 @@
                             <th scope="col">Visita</th>
                             <th scope="col">Creación</th>
                             <th scope="col">Creador</th>
-                            <th scope="col">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
