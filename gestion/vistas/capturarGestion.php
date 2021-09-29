@@ -1,4 +1,4 @@
-<div>
+<div class="container-fluid">
     <div class="position-fixed top-0 end-0 pt-5" style="z-index: 11">
         <div id="liveToast" class="toast hide bg-success text-light col-2" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header justify-content-end">
@@ -10,8 +10,8 @@
 
     <h3 class="text-center mt-2 text-primary">Captura de gestión</h3>
     <div class="col-12">
-        <div class="row container">
-            <div class="col-4 border p-2">
+        <div class="row p-4">
+            <div class="form-capturar col-lg-4 col-sm-11 border p-2">
                 <h4 class="text-center">Gestión</h4>
                 <form id="form-crear" method="POST">
                     <div class="mb-3">
@@ -42,9 +42,9 @@
                 </form>
             </div>
 
-            <div class="col-1"></div>
+            <div class="col-lg-1"></div>
 
-            <div class="col-7 mt-5 table-responsive">
+            <div class="col-lg-7 col-sm-11 mt-5 table-responsive">
                 <table id="table-gestiones" class="table table-bordered table-striped">
                     <thead>
                         <tr>

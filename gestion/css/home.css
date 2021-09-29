@@ -1,0 +1,38 @@
+.menu-main {
+    background-color: #97B5E6;
+}
+
+.navbar-brand {
+    filter: brightness(0);
+}
+
+.nav-link {
+    color: #404D61;
+    width: fit-content;
+    margin-right: 3px;
+}
+
+.nav-link:hover,
+.active {
+    color: white;
+    background-color: #3E69AD;
+}
+
+.form-capturar {
+    box-shadow: 3px 3px 7px black;
+}
+
+.btn-gestion {
+    background-color: #259ABD;
+    border: none;
+    box-shadow: 1px 1px 5px black;
+}
+
+.btn-tg {
+    background-color: #259ABD;
+}
+
+.ticket-cont {
+    display: flex;
+    flex-direction: row-reverse;
+}

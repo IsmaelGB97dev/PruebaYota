@@ -1,5 +1,9 @@
 <?php
     $solicitud = $_REQUEST['dr'] ?? '';
+    if($solicitud == 'lg') {
+        $sesion->BorrarSesion();
+        header('location: ../');
+    }
 ?>
 
 <!DOCTYPE html>
@@ -13,6 +17,7 @@
 
     <link rel="icon" href="gestion/imagenes/fav.png">
     <link rel="stylesheet" href="gestion/css/bootstrap.min.css">
+    <link rel="stylesheet" href="gestion/css/home.css">
 
     
     <script src="gestion/js/jquery-3.6.0.min.js"></script>
@@ -21,9 +26,9 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="menu-main navbar navbar-expand-lg">
         <div class="container-fluid">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler navbar-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
             <a class="navbar-brand" href="#">
@@ -44,10 +49,10 @@
                 <form class="d-flex me-5">
                     <div class="dropdown">
                         <a class="btn btn-outline-dark dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                          Usuario: 
+                          Usuario: <?php echo $sesion->getNombreActual(); ?>
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <li><a class="dropdown-item" href="#">Salir</a></li>
+                            <li><a class="dropdown-item" href="?dr=lg">Salir</a></li>
                         </ul>
                     </div>
                 </form>
@@ -60,7 +65,7 @@
             case '': include_once 'gestion/vistas/capturarGestion.php'; break; 
             case 'gestion': include_once 'gestion/vistas/capturarGestion.php'; break;
             case 'lista': include_once 'gestion/vistas/listaGestiones.php'; break;
-            case 'tickets': include_once 'gestion/vistas/tickets.php'; break;
+            case 'tickets': include_once 'gestion/vistas/tickets.php'; break;            
         }
     ?>
 </body>
