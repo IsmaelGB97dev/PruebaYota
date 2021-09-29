@@ -2,7 +2,8 @@ $(document).ready(function() {
     let formCrear = $('#form-crear'),
         txtNombre = $('#nombre'),
         txtCreacion = $('#creacion'),
-        tabla = $('#table-gestiones');
+        tabla = $('#table-gestiones'),
+        mensaje = $('.toast');
 
 
     ObtenerGestiones();
@@ -21,9 +22,10 @@ $(document).ready(function() {
             },
             success: function(res) {
                 if (res.trim() == 'true') {
+                    MostrarMensaje(`Gestión '${txtNombre.val().trim()}', Agregada`);
                     ObtenerGestiones();
                 } else {
-                    alert('Ocurrio un error, intentalo nuevamente.');
+                    MostrarMensaje('Ocurrio un error');
                 }
             }
         });
@@ -54,6 +56,11 @@ $(document).ready(function() {
                 tabla.find('tbody').html(html);
             }
         });
+    }
+
+    function MostrarMensaje(texto) {
+        mensaje.toast('show');
+        mensaje.find('.toast-body').html(texto);
     }
 
 });

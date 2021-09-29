@@ -35,17 +35,52 @@ function ObtenerGestiones() {
 
 function InsertarGestionCliente() {
     $controladorgesCliente = new GestionClienteController();
-    $respuesta = $controladorgesCliente->InsertarGestionCliente($_POST['gestion'], 'no', date('Y-m-d'));
+    $respuesta = $controladorgesCliente->InsertarGestionCliente($_POST['gestion'], 'no', date('Y-m-d H:i:s'));
     if($respuesta) {
-        return 'true';
+        echo 'true';
     } else {
-        return 'false';
+        echo 'false';
     }
 }
+
+function AtenderGestionCliente() {
+    $controladorgesCliente = new GestionClienteController();
+    $resultado = $controladorgesCliente->AtenderGestionCliente($_POST['gestion']);
+    if($resultado) {
+        echo 'true';
+    } else {
+        echo 'false';
+    }
+}
+
+function CargarGestionesCliente() {
+    $controladorGesCliente = new GestionClienteController();
+    $respuesta = $controladorGesCliente->ObtenerGestionesCliente();
+    if($respuesta) {
+        echo json_encode($respuesta);
+    } else {
+        echo "false";
+    }
+}
+
+function VerificarAtendido() {
+    $controladorgesCliente = new GestionClienteController();
+    $res = $controladorgesCliente->VerificarAtendido($_POST['gestion']);
+    if($res) {
+        echo 'true';
+    } else {
+        echo 'false';
+    }
+}
+
 
 switch($_POST['funcion']) {
     case 'crear': CrearGestion(); break;
     case 'datos': ObtenerGestiones(); break;
     case 'gestionCliente': InsertarGestionCliente(); break;
+    case 'atender': AtenderGestionCliente(); break;
+    case 'datosCl': CargarGestionesCliente(); break;
+    case 'verificar': VerificarAtendido(); break;
+    
 }
 

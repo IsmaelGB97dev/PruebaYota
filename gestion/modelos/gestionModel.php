@@ -7,6 +7,10 @@ class GestionModel extends DB
     private $codigoUsuario;
     private $fechaCreacion;
 
+    public function __construct()
+    {
+    }
+
     public function setCodigoGestion($codigoGestion) {
         $this->codigoGestion = $codigoGestion;
     }

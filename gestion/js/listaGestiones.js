@@ -1,6 +1,7 @@
 $(document).ready(function() {
     let contenedor = $('#contenedor-botones'),
-        btnGestiones = $(".btn-gestion");
+        btnGestiones = $(".btn-gestion"),
+        mensaje = $('.toast');
 
     CargarGestiones();
     btnGestiones.on('click', RegistrarGestionCliente);
@@ -26,18 +27,27 @@ $(document).ready(function() {
     }
 
     function RegistrarGestionCliente() {
-        let gestion = $(this).attr('r');
+        let gestion = $(this);
         $.ajax({
             type: "post",
             url: 'gestion/ajax/gestionAjax.php',
             data: {
-                gestion: gestion,
+                gestion: gestion.attr('r'),
                 funcion: 'gestionCliente'
             },
             success: function(res) {
-                alert(res);
+                if (res.trim() == 'true') {
+                    MostrarMensaje(`Gestion de cliente registrada: ${gestion.html()}`);
+                } else {
+                    MostrarMensaje('Ocurrio un error');
+                }
             }
         });
+    }
+
+    function MostrarMensaje(texto) {
+        mensaje.toast('show');
+        mensaje.find('.toast-body').html(texto);
     }
 
     function Reasignar() {

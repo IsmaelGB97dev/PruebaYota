@@ -16,7 +16,8 @@
 
     
     <script src="gestion/js/jquery-3.6.0.min.js"></script>
-    <script src="gestion/js/bootstrap.bundle.min.js"></script>
+    <script src="gestion/js/bootstrap.min.js"></script>
+    <script src="gestion/js/popper.min.js"></script>
 </head>
 
 <body>
